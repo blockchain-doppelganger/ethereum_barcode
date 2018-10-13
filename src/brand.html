@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/kabinet.css">
+        <script src="js/kabinet/jquery-3.3.1.js"></script>
+        <script src="js/kabinet/web3.min.js"> </script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="dist/brandBundle.js"></script>
+        <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    </head>
+    <body>
+
+        <nav class="nav justify-content-end">
+            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link" href="#">Check</a>
+            <a class="nav-link" href="#">Login</a>
+            <!-- <a class="nav-link disabled" href="#"></a> -->
+        </nav>
+        <div class='warning'>
+
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 ">
+                     <div class="list-group ">
+                      <a href="./kabinet.html" class="list-group-item list-group-item-action ">Profile</a>
+                      <a href="./brand.html" class="list-group-item list-group-item-action active">Brand</a>
+                      <a href="./product.html" class="list-group-item list-group-item-action ">Products</a>
+                      <a href="./createBarcode.html" class="list-group-item list-group-item-action">Create barcode</a>
+                      <a href="#" class="list-group-item list-group-item-action">Verified</a>
+                      <!-- <a href="#" class="list-group-item list-group-item-action">Media</a> -->
+                      <!-- <a href="#" class="list-group-item list-group-item-action">Post</a>
+                      <a href="#" class="list-group-item list-group-item-action">Category</a>
+                      <a href="#" class="list-group-item list-group-item-action">New</a>
+                      <a href="#" class="list-group-item list-group-item-action">Comments</a>
+                      <a href="#" class="list-group-item list-group-item-action">Appearance</a>
+                      <a href="#" class="list-group-item list-group-item-action">Reports</a>
+                      <a href="#" class="list-group-item list-group-item-action">Settings</a> -->
+                      
+                      
+                    </div> 
+                </div>
+                
+                <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Your brands</h4>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-md-12">
+                                        <p id="product_warning"></p>
+                                    </div>
+                                </div>
+
+                                <div class="row register_app">
+                                    <div class="col-md-12">
+                                        <br>
+                                            <p>! Your ethereum address  <span id="userAddress"></span>    will be connect with this company. Only this address can change company information</p>
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Company name</label>
+                                                <input type="text" class="form-control" id="inputCompanyName" placeholder="Name" required>
+                                                </div>
+                                                <!-- <div class="form-group col-md-6">
+                                                <label for="inputPassword4">Password</label>
+                                                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                                </div> -->
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress">Address</label>
+                                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress2">Address 2</label>
+                                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputCity">City</label>
+                                                <input type="text" class="form-control" id="inputCity">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                <label for="inputState">State</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>Choose...</option>
+                                                    <option>...</option>
+                                                </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                <label for="inputZip">Zip</label>
+                                                <input type="text" class="form-control" id="inputZip">
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                                <label class="form-check-label" for="gridCheck">
+                                                    Check me out
+                                                </label>
+                                                </div>
+                                            </div> -->
+                                            <a href="#" onclick='createApp();return false' class="btn btn-info" role="button">Submit</a>
+                                        </form>
+                                    </div>
+                                </div> 
+                                            
+                                <div class="brandList">
+                                    <p>Your brand : <span id="userBrandCount"></span></p>
+                                    <ul id="brandList"> </ul>
+                                </div>
+
+                                <div class="row createBrand">
+                                    <div class="col-md-12">
+                                        <br>
+                                        <p>Only owner of Ethereum brand address can add product for this brand. You can also use your own Ethereum address for brand address <br>Onew address - one brand</p>
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Brand name</label>
+                                                <input type="text" class="form-control" id="createBrandName" placeholder="Name" required>
+                                                </div>
+                                                <!-- <div class="form-group col-md-6">
+                                                <label for="inputPassword4">Password</label>
+                                                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                                </div> -->
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress">Ethereum address of brand</label>
+                                                <input maxlength="42" minlength="42" type="text" class="form-control" id="brandAddress" placeholder="0x">
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <label for="inputAddress2">Address 2</label>
+                                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputCity">City</label>
+                                                <input type="text" class="form-control" id="inputCity">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                <label for="inputState">State</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>Choose...</option>
+                                                    <option>...</option>
+                                                </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                <label for="inputZip">Zip</label>
+                                                <input type="text" class="form-control" id="inputZip">
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="form-group">
+                                                <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                                <label class="form-check-label" for="gridCheck">
+                                                    Check me out
+                                                </label>
+                                                </div>
+                                            </div> -->
+                                            <a href="#" onclick='createBrand();return false' class="btn btn-info" role="button">Create brand</a>
+                                        </form>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row update_app">
+                                    <div class="col-md-12">
+                                        <br>
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Company name</label>
+                                                <input type="text" class="form-control" id="updateCompanyName" placeholder="Name" required>
+                                                </div>
+                                                <!-- <div class="form-group col-md-6">
+                                                <label for="inputPassword4">Password</label>
+                                                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                                </div> -->
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress">Address</label>
+                                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress2">Address 2</label>
+                                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputCity">City</label>
+                                                <input type="text" class="form-control" id="inputCity">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                <label for="inputState">State</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>Choose...</option>
+                                                    <option>...</option>
+                                                </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                <label for="inputZip">Zip</label>
+                                                <input type="text" class="form-control" id="inputZip">
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                                <label class="form-check-label" for="gridCheck">
+                                                    Check me out
+                                                </label>
+                                                </div>
+                                            </div> -->
+                                            <a href="#" onclick='updateApp();return false' class="btn btn-info" role="button">Update info</a>
+                                        </form>
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+                        </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    <script>
+    function createApp(event){
+        alert('hi');
+        const AppName = $('#inputCompanyName').val();
+        console.log(AppName);
+        console.log(web3.eth.coinbase);
+        deveryRegistryClient.addApp(AppName,web3.eth.coinbase,0).then(transaction => {
+            console.log('transaction address',transaction.hash);
+            //... other stuff
+        }).catch(err => {
+            if(err.message.indexOf('User denied')){
+                console.log('The user denied the transaction')
+                //...
+            }
+            ///handle other exceptions here
+        })
+        }   ;
+    function createBrand(event){
+
+        const brandAddr = $('#brandAddress').val();
+        console.log(brandAddr)
+        const brandName = $('#createBrandName').val();
+        console.log(brandName);
+        deveryRegistryClient.addBrand(brandAddr,brandName).then(transaction => {
+            // console.log('transaction address',transaction.hash);
+            //... other stuff
+        }).catch(err => {
+            if(err.message.indexOf('User denied')){
+                console.log('The user denied the transaction')
+                //...
+            }
+
+            ///handle other exceptions here
+
+        })
+
+    }
+    </script>
+    </body>
+</html>

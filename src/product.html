@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/kabinet.css">
+        <script src="js/kabinet/jquery-3.3.1.js"></script>
+        <script src="js/kabinet/web3.min.js"> </script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="js/kabinet/bootstrap.min.js"></script>
+        <script src="dist/productBundle.js"></script>
+        <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    </head>
+    <body>
+
+        <nav class="nav justify-content-end">
+            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link" href="#">Check</a>
+            <a class="nav-link" href="#">Login</a>
+            <!-- <a class="nav-link disabled" href="#"></a> -->
+        </nav>
+        <div class='warning'>
+
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 ">
+                     <div class="list-group ">
+                      <a href="./kabinet.html" class="list-group-item list-group-item-action ">Profile</a>
+                      <a href="./brand.html" class="list-group-item list-group-item-action">Brand</a>
+                      <a href="./product.html" class="list-group-item list-group-item-action active">Products</a>
+                      <a href="./createBarcode.html" class="list-group-item list-group-item-action">Create barcode</a>
+                      <a href="#" class="list-group-item list-group-item-action">Verified</a>
+                      <!-- <a href="#" class="list-group-item list-group-item-action">Media</a> -->
+                      <!-- <a href="#" class="list-group-item list-group-item-action">Post</a>
+                      <a href="#" class="list-group-item list-group-item-action">Category</a>
+                      <a href="#" class="list-group-item list-group-item-action">New</a>
+                      <a href="#" class="list-group-item list-group-item-action">Comments</a>
+                      <a href="#" class="list-group-item list-group-item-action">Appearance</a>
+                      <a href="#" class="list-group-item list-group-item-action">Reports</a>
+                      <a href="#" class="list-group-item list-group-item-action">Settings</a> -->
+                      
+                      
+                    </div> 
+                </div>
+                
+                <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Your product</h4>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-md-12">
+                                        <p id="product_warning">You didn't register your company and brand. Please go to Brand link and follow the instructions</p>
+                                    </div>
+                                </div>
+
+                                <div class="row register_product">
+                                    <div class="col-md-12">
+                                        <br>
+                                            <!-- <p>! Your ethereum address  <span id="userAddress"></span>    will be connect with this company. Only this address can change company information</p> -->
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="registerProductDesc">Product description *</label>
+                                                <input type="text" class="form-control" id="registerProductDesc" placeholder="LG gram Thin and Light Laptop " required>
+                                                </div>
+                                                <!-- <div class="form-group col-md-6">
+                                                <label for="inputPassword4">Password</label>
+                                                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                                </div> -->
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="registerProductDetails">Details *</label>
+                                                <input type="text" class="form-control" id="registerProductDetails" placeholder="15.6 Full HD IPS Display, Intel Core i5 (8th Gen), 8GB RAM, 256GB SSD, Back-lit Keyboard - Dark Silver – 15Z980-U.AAS5U1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="registerProductYear">Year (optional)</label>
+                                                <input type="number" min='1900' class="form-control" id="registerProductYear" placeholder="2018">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="registerProductOrigin">Origin (optional)</label>
+                                                <input type="text" class="form-control" id="registerProductOrigin" placeholder="China">
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <label for="inputAddress2">Address 2</label>
+                                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                            </div> -->
+                                            <!-- <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputCity">City</label>
+                                                <input type="text" class="form-control" id="inputCity">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                <label for="inputState">State</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>Choose...</option>
+                                                    <option>...</option>
+                                                </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                <label for="inputZip">Zip</label>
+                                                <input type="text" class="form-control" id="inputZip">
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="form-group">
+                                                <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                                <label class="form-check-label" for="gridCheck">
+                                                    Check me out
+                                                </label>
+                                                </div>
+                                            </div> -->
+                                            <a href="#" onclick='createProduct();return false' class="btn btn-info" role="button">Register</a>
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                                <div class="productList">
+                                    <br>
+                                    <hr>
+                                    <p>Your product : <span id="userProductCount"></span></p>
+                                    <!-- <ul id="productList"> </ul> -->
+                                    <!-- <p id='toogle_form'>
+                                        <a class="btn btn-primary" data-toggle="collapse" href="" role="button" aria-expanded="false" aria-controls="">
+                                          Collapse
+                                        </a>
+                                    </p> -->
+
+                                    <!-- <form class='123444'>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                            <label for="registerProductDesc">Product description *</label>
+                                            <input type="text" class="form-control" id="registerProductDesc" placeholder="LG gram Thin and Light Laptop " required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="registerProductDetails">Details *</label>
+                                            <input type="text" class="form-control" id="registerProductDetails" placeholder="15.6 Full HD IPS Display, Intel Core i5 (8th Gen), 8GB RAM, 256GB SSD, Back-lit Keyboard - Dark Silver – 15Z980-U.AAS5U1">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="registerProductYear">Year (optional)</label>
+                                            <input type="number" min='1900' class="form-control" id="registerProductYear" placeholder="2018">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="registerProductOrigin">Origin (optional)</label>
+                                            <input type="text" class="form-control" id="registerProductOrigin" placeholder="China">
+                                        </div>
+                                        <a href="#" onclick='updateProduct();return false' class="btn btn-info" role="button">Register</a>
+                                    </form> -->
+
+                                </div>
+
+
+                                
+
+                            </div>
+                        </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    <script>
+     function createProduct(event){
+
+        const desc = $('#registerProductDesc').val();
+        const det = $('#registerProductDetails').val();
+        const year = $('#registerProductYear').val();
+        const orig = $('#registerProductOrigin').val();
+        
+        var addr = utils.getRandomAddress();
+        console.log(addr);
+        deveryRegistryClient.addProduct(addr,desc,det,year,origin).then(transaction => {
+            // console.log('transaction address',transaction.hash);
+            //... other stuff
+        }).catch(err => {
+            if(err.message.indexOf('User denied')){
+                console.log('The user denied the transaction')
+                //...
+            }
+
+            ///handle other exceptions here
+
+        })
+     }
+    </script>
+    </body>
+</html>

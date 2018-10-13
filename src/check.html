@@ -1,0 +1,186 @@
+<html>
+    <head>
+
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Check</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="js/jquery-3.3.1.slim.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <!-- <script src="js/popper.min.js"></script> -->
+        <script src="./dist/checkBundle.js"></script>
+        <!-- <link rel="stylesheet" href="css/index.css"> -->
+        <!-- <script src="js/bundle.js"></script> -->
+    </head>
+    <style>
+    ul{
+        text-align: left;
+    }
+    span{
+        text-align: right;
+    }
+    </style>
+    <body>
+
+        <div class="contrainer">
+            <p id="product_warning"></p>
+                <div class="header">
+                    <nav class="nav justify-content-end">
+                        <a class="nav-link " href="./index.html">Home</a>
+                        <a class="nav-link active" href="./check.html">Check</a>
+                        <a class="nav-link" href="#">Login</a>
+                        <!-- <a class="nav-link disabled" href="#"></a> -->
+                    </nav>
+
+                <div class="row">
+                    <div class="col-mg-6 col-lg-6 text-center">
+                        <img id="img" src="" alt="">
+                        <br>
+                        <div>
+                            <input id="upload" type="file"> 
+                        </div>
+                        <br>
+                        <a class="btn btn-info" style="color:white" id="decodeButton">Decode</a>
+                        <br>
+                       
+                    </div>
+                    <div class="col-mg-5 col-lg-5  text-center">
+                        <label>Result:</label>
+                        <blockquote>
+                            <p id="result"></p>
+                        </blockquote>
+                        <table  class="table">
+                            <thead>
+                                
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Company Name:</th>
+                                    <td id="companyName"></td>
+                                </tr>
+                                <tr>
+                                    <th>Brand name:</th>
+                                    <td id="brandName"></td>
+                                </tr>
+                                    <tr>
+                                    <th>Product descripton:</th>
+                                    <td id="productDesc"></td>
+                                </tr>
+                                <tr>
+                                    <th>Product details :</th>
+                                    <td id="productDetails"></td>
+                                </tr>
+                                <tr>
+                                    <th>Product year:</th>
+                                    <td id="productYear"></td>
+                                </tr>
+                                <tr>
+                                    <th>Product origin:</th>
+                                    <td id="productOrigin"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- <ul>
+                            <li >Company Name:<span id="companyName"></span></li>
+                            <li >Brand name: <span ></span>         </li>
+                            <li >Product descripton: <span id="productDesc"></span>  </li>
+                            <li >Product details  <span id="productDetails"></span></li>
+                            <li >Product year  <span id="productYear"></span></li>
+                            <li >Product origin  <span id="productOrigin"></span></li>
+                            
+                        </ul> -->
+                    </div>
+        
+                </div>
+                       
+
+
+                
+    
+        </div>  
+
+    <script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            const codeReader = new ZXing.BrowserQRCodeReader('video')
+            console.log('ZXing code reader initialized')
+            document.getElementById('decodeButton').addEventListener('click', () => {
+                // const img = $('#upload_img');
+                // console.log(document.getElementById('img'));
+                // console.log(img);
+                codeReader.decodeFromImage(img).then((result) => {
+                    
+                    deveryRegistryClient.check(result.text).then(item => {
+                        const brandAccount = item.brandAccount;
+                        const appAccount = item.appAccount;
+                        const productAccount = item.productAccount;
+                        console.log('productAccount',productAccount);
+                        
+                        deveryRegistryClient.getApp(appAccount).then(res =>{
+                            $('#companyName').html(res.appName);
+                        }).catch((err) => {
+                            console.error(err)
+                            document.getElementById('result').textContent = err
+                        })
+                        deveryRegistryClient.getBrand(brandAccount).then(res =>{
+                            $('#brandName').html(res.brandName);
+                        }).catch((err) => {
+                            console.error(err);
+                            document.getElementById('result').textContent = err;
+                        })
+
+                        deveryRegistryClient.getProduct(productAccount).then(function(res){
+                            $('#productDesc').html(res.description);
+                            $('#productDetails').html(res.details);
+                            $('#productYear').html(res.year);
+                            $('#productOrigin').html(res.origin);
+
+                        }).catch((err) => {
+                            console.error(err)
+                            document.getElementById('result').textContent = err
+                        })
+                        // console.log('product brand',item.brandAccount);
+                        //... other stuff
+                    })
+
+                    // console.log(result)
+                    document.getElementById('result').textContent = result.text
+                }).catch((err) => {
+                    console.error(err)
+                    document.getElementById('result').textContent = err
+                })
+                console.log(`Started decode for image from ${img.src}`)
+            })
+        })
+    </script>
+
+    <!-- for uploading images -->
+    <script>
+    $('#upload').change(function(){
+    var input = this;
+    var url = $(this).val();
+    var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+    if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg") ||  ext == "svg" ) 
+     {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+           $('#img').attr('src', e.target.result);
+        }
+       reader.readAsDataURL(input.files[0]);
+    }
+    else
+    {
+      $('#img').attr('src', '');
+    }
+  });
+    </script>
+
+    <script>
+    
+    </script>
+
+
+    </body>
+</html>

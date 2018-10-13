@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/bundle.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+     -->
+</head>
+<body>
+    <a href="./kabinet.html"></a>
+    <!-- <script src="bundle.js"></script>/ -->
+    <div class="contrainer">
+        <div class="header">
+            <nav class="nav justify-content-end">
+                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link" href="#whywe">Why we</a>
+                <a class="nav-link" href="./check.html">Check</a>
+                <a class="nav-link" href="#">Login</a>
+                <!-- <a class="nav-link disabled" href="#"></a> -->
+            </nav>
+              
+            <div class="row">
+                <div class="col-md-6">
+                      <form action="">
+
+                      </form>
+                </div>
+
+                <div class="col-md-6 right_form">
+                    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+                        <div class="panel panel-info" >
+                            <div class="panel-heading">
+                                <div class="panel-title">Sign In</div>
+                                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
+                            </div>     
+        
+                            <div style="padding-top:30px" class="panel-body" >
+                                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>     
+                                <form id="loginform" class="form-horizontal" role="form">            
+                                    <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">                                        
+                                    </div>
+                                        
+                                    <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                                    </div>
+                                            
+        
+                                        
+                                    <!-- <div class="input-group">
+                                        <div class="checkbox">
+                                        <label>
+                                            <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+                                        </label>
+                                        </div>
+                                    </div> -->
+        
+        
+                                        <!-- <div style="margin-top:10px" class="form-group">
+                                            Button
+        
+                                            <div class="col-sm-12 controls">
+                                              <a id="btn-login" href="#" class="btn btn-success">Login  </a>
+                                              <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
+        
+                                            </div>
+                                        </div> -->
+        
+        
+                                    <div class="form-group">
+                                        <div class="col-md-12 control">
+                                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                                Don't have an account! 
+                                            <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                                Sign Up Here
+                                            </a>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </form>     
+        
+        
+        
+                            </div>                     
+                        </div>  
+                    </div>
+                    <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <div class="panel-title">Sign Up</div>
+                                    <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+                                </div>  
+                                <div class="panel-body" >
+                                    <form id="signupform" class="form-horizontal" role="form">
+                                        
+                                        <div id="signupalert" style="display:none" class="alert alert-danger">
+                                            <p>Error:</p>
+                                            <span></span>
+                                        </div>
+                                            
+                                        
+                                          
+                                        <div class="form-group">
+                                            <label for="email" class="col-md-12 control-label">Email</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" name="email" placeholder="Email Address">
+                                            </div>
+                                        </div>
+                                            
+                                        <div class="form-group">
+                                            <label for="firstname" class="col-md-12 control-label">First Name</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" name="firstname" placeholder="First Name">
+                                            </div>
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <label for="lastname" class="col-md-3 control-label">Last Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+                                            </div>
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label for="password" class="col-md-12 control-label">Password</label>
+                                            <div class="col-md-12 ">
+                                                <input type="password" class="form-control" name="passwd" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="password" class="col-md-12 control-label">Repeat password</label>
+                                            <div class="col-md-12 ">
+                                                <input type="password" class="form-control" name="passwd" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <label for="icode" class="col-md-3 control-label">Invitation Code</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" name="icode" placeholder="">
+                                            </div>
+                                        </div> -->
+        
+                                        <div class="form-group">
+                                            <!-- Button -->                                        
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>   
+                                            </div>
+                                        </div>
+                                                                 
+                                    </form>
+                                 </div>
+                            </div>
+        
+                       
+                       
+                        
+                        </div> 
+                    </div>
+                </div>
+              <!-- <div class="main_form"> -->
+
+              <!-- </div> -->
+          </div>
+
+          <div class="row">
+            <a name='whywe'></a>  
+            <div class="col-md-12 text-center">
+                <br>
+               <h1>Why we ? </h1> 
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="./images/gs1_logo.png" alt="gs1_logo" width="30%">
+                <ul id="gs1_disadv">
+                    <li>A lot of routine, require write minimum 8 documents</li>
+                    <li>Long period of getting barcode (from 1 week) </li>
+                    <li>Big prise for barcode ownership (hundreds of dollars)</li>
+                    <li>All data is store in one company</li>
+                </ul>
+            </div>
+            <div class="col-md-6 text-center">
+                    <img src="./images/eth_barcode.png" alt="gs1_logo" width="30%">
+                    <ul id="advantages">
+                        <li>You don't need any document to create you own barcode</li>
+                        <li>Install metamask, 2 minutes for start</li>
+                        <li>You pay just for writing data in Ethereum (few dollars) </li>
+                        <li>All data is store on Ethereum, which is public blockchain</li>
+                    </ul>
+            </div>
+          </div>
+    </div>
+
+    <script>
+    $(function() {
+
+$('#login-form-link').click(function(e) {
+    $("#login-form").delay(100).fadeIn(100);
+     $("#register-form").fadeOut(100);
+    $('#register-form-link').removeClass('active');
+    $(this).addClass('active');
+    e.preventDefault();
+});
+$('#register-form-link').click(function(e) {
+    $("#register-form").delay(100).fadeIn(100);
+     $("#login-form").fadeOut(100);
+    $('#login-form-link').removeClass('active');
+    $(this).addClass('active');
+    e.preventDefault();
+});
+
+});
+
+</script>
+</body>
+</html>
