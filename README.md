@@ -1,1 +1,6 @@
-## Getting start
+# Getting started
+
+```
+npm run dev
+```
+##
