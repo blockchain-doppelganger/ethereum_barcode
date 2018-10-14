@@ -51,9 +51,6 @@ After that you can find your product in table below and create barcode for it, a
 
 Go to localhost:3000/check.html, upload barcode, click decode, you will see company name, brand name, product info 
 
-
-![alt text](https://raw.githubusercontent.com/blockchain-doppelganger/ethereum_barcode/master/git_img/check1.png)
-
 ![alt text](https://raw.githubusercontent.com/blockchain-doppelganger/ethereum_barcode/master/git_img/check2.png)
 
 
