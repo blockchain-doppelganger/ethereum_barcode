@@ -17,7 +17,20 @@
     "@webpack-cli/init": "^0.1.2",
     "file-saver": "^2.0.0-rc.3",
     "keccak": "^1.4.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.11",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.15.2",
+    "joi": "^13.0.1",
+    "mongoose": "^4.11.12",
+    "morgan": "^1.8.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
