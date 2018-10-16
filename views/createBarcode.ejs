@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/profile.css">
+        <script src="js/profile/jquery-3.3.1.js"></script>
+        <script src="js/profile/web3.min.js"> </script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- <script src="dist/createBarcodeBundle.js"></script> -->
+        <script src="dist/createBarcodeBundle.js"></script>
+
+        <!-- For barcode lirary 
+            https://github.com/zxing-js/library/blob/master/docs/examples/qr-svg-writer/index.html
+        -->
+        <!-- <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https:https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"> -->
+        <!-- <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css"> -->
+        <!-- <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css"> -->
+    
+    </head>
+    <body>
+
+        <nav class="nav justify-content-end">
+            <a class="nav-link " href="/home">Home</a>
+            <a class="nav-link active" href="/check">Check</a>
+            <a class="nav-link" href="/logout">Logout</a>
+        </nav>
+
+        <div class='warning'></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 ">
+                     <div class="list-group ">
+                        <a href="./profile" class="list-group-item list-group-item-action ">Profile</a>
+                        <a href="./brand" class="list-group-item list-group-item-action">Brand</a>
+                        <a href="./product" class="list-group-item list-group-item-action">Products</a>
+                        <a href="./createBarcode" class="list-group-item list-group-item-action active">Create barcode</a>
+                      <a href="#" class="list-group-item list-group-item-action">Verified</a>
+                      <a href="./history" class="list-group-item list-group-item-action">History</a>
+                      <a href="./explorer" class="list-group-item list-group-item-action">Explorer</a>
+                      <!-- <a href="#" class="list-group-item list-group-item-action">Media</a> -->
+                      <!-- <a href="#" class="list-group-item list-group-item-action">Post</a>
+                      <a href="#" class="list-group-item list-group-item-action">Category</a>
+                      <a href="#" class="list-group-item list-group-item-action">New</a>
+                      <a href="#" class="list-group-item list-group-item-action">Comments</a>
+                      <a href="#" class="list-group-item list-group-item-action">Appearance</a>
+                      <a href="#" class="list-group-item list-group-item-action">Reports</a>
+                      <a href="#" class="list-group-item list-group-item-action">Settings</a> -->
+                      
+                      
+                    </div> 
+                </div>
+                
+                <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Your barcodes</h4>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-md-12">
+                                        <p id="warning"></p>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row register_app">
+                                    <div class="col-md-12">
+                                        <br>
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Company name</label>
+                                                <input type="text" class="form-control" id="inputCompanyName" placeholder="Name" required>
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress">Address</label>
+                                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress2">Address 2</label>
+                                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputCity">City</label>
+                                                <input type="text" class="form-control" id="inputCity">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                <label for="inputState">State</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>Choose...</option>
+                                                    <option>...</option>
+                                                </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                <label for="inputZip">Zip</label>
+                                                <input type="text" class="form-control" id="inputZip">
+                                                </div>
+                                            </div>
+                                          
+                                            <a href="#" onclick='createApp();return false' class="btn btn-info" role="button">Submit</a>
+                                        </form>
+                                    </div>
+                                </div>  -->
+                                      
+                                <div class="barcodeList">
+                                    <a style="color:white;" role="button" onclick='permisionMark();return false' class="btn btn-info">Activate barcode creation (once) </a>
+                                    <br>
+                                    <br>
+                                    <p>If you enable to create barcode, maybe you didn't activate barcode creating. Click button about and wait for transaction confirmation</p>
+                                    <br>
+                                    <p>Your barcodes : <span id="userBarcodeCount"></span></p>
+                                </div>
+
+                                <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                                <br>
+                                <div class="row ">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>Description</th>
+                                                <th>Details</th>
+                                                <th>Year</th>
+                                                <th>Origin</th>
+                                                <th>Barcode</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="myTable">
+                                            <!-- <tr>
+                                                <td>John</td>
+                                                <td>Doe</td>
+                                                <td>john@example.com</td>
+                                                <td>  </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mary</td>
+                                                <td>Moe</td>
+                                                <td>mary@mail.com</td>
+                                            </tr>
+                                            <tr>
+                                                <td>July</td>
+                                                <td>Dooley</td>
+                                                <td>july@greatstuff.com</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Anja</td>
+                                                <td>Ravendale</td>
+                                                <td>a_r@test.com</td>
+                                            </tr> -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row createBarcode">
+                                    <div class="col-md-12">
+                                        <br>
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Brand name</label>
+                                                <input type="text" class="form-control" id="createBrandName" placeholder="Name" required>
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress">Ethereum address of brand</label>
+                                                <input maxlength="42" minlength="42" type="text" class="form-control" id="brandAddress" placeholder="0x">
+                                            </div>
+                                            
+                                            <a href="#" onclick='createBrand();return false' class="btn btn-info" role="button">Create brand</a>
+                                        </form>
+                                    </div>
+                                </div> -->
+                                <hr>
+
+
+                                <!-- <div class="row update_app">
+                                    <div class="col-md-12">
+                                        <br>
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Company name</label>
+                                                <input type="text" class="form-control" id="updateCompanyName" placeholder="Name" required>
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress">Address</label>
+                                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress2">Address 2</label>
+                                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputCity">City</label>
+                                                <input type="text" class="form-control" id="inputCity">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                <label for="inputState">State</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>Choose...</option>
+                                                    <option>...</option>
+                                                </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                <label for="inputZip">Zip</label>
+                                                <input type="text" class="form-control" id="inputZip">
+                                                </div>
+                                            </div>
+                                            
+                                            <a href="#" onclick='updateApp();return false' class="btn btn-info" role="button">Update info</a>
+                                        </form>
+                                    </div>
+                                </div> -->
+
+                               
+                            </div>
+                        </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    <script>
+     function permisionMark(e){
+        //  e.preventDefault();
+        deveryRegistryClient.permissionMarker(web3.eth.coinbase,true).then(transaction => {
+            // console.log('transaction address',transaction.hash);
+            //... other stuff
+        }).catch(err => {
+            if(err.message.indexOf('User denied')){
+                console.log('The user denied the transaction')
+                //...
+            }
+
+            ///handle other exceptions here
+
+        })
+     }
+    </script>
+
+    <script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
+    <script type="text/javascript" src="https://unpkg.com/file-saver@latest"></script>
+    <script type="text/javascript">
+        // window.addEventListener('load', () => {
+            // const codeWriter = new ZXing.BrowserQRCodeSvgWriter('result')
+            // console.log('ZXing code writer initialized')
+            // let svgElement;
+            // document.getElementById('writeButton').addEventListener('click', () => {
+            //     const input = document.getElementById('textInput').value
+            //     svgElement = codeWriter.write(input, 300, 300)
+            //     document.getElementById('saveButton').removeAttribute('disabled')
+            // })
+            // document.getElementById('saveButton').addEventListener('click', () => {
+            //     const svgData = (new XMLSerializer()).serializeToString(svgElement)
+            //     const blob = new Blob([svgData])
+            //     saveAs(blob, 'zxing-qrcode-example.svg')
+            // })
+        // })
+    </script>
+
+<script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+        </script>
+
+    </body>
+</html>

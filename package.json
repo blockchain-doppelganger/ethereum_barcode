@@ -1,0 +1,31 @@
+{
+  "name": "ether_barcode",
+  "version": "0.0.2",
+  "main": "app.js",
+  "repository": "https://github.com/devery/hackathon_entries.git",
+  "author": "blockchain-doppelganger <doppengalger@tutanota.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app",
+    "watch": "nodemon app && mongod"
+  },
+  "dependencies": {
+    "@devery/devery": "^0.1.12",
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "connect-mongo": "^1.3.2",
+    "ejs": "^2.6.1",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "keccak": "^1.4.0",
+    "mailgun-js": "^0.21.0",
+    "mongoose": "^4.9.8",
+    "nodemailer": "^4.6.8",
+    "nodemon": "^1.11.0",
+    "random-string": "^0.2.0",
+    "string-hash": "^1.1.3"
+  },
+  "devDependencies": {
+    "@types/node": "^10.11.7"
+  }
+}

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/profile.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+
+        <script src="js/profile/jquery-3.3.1.js"></script>
+        <script src="js/profile/web3.min.js"> </script>
+        <script src="js/profile/bootstrap.min.js"></script>
+        <script src="dist/productBundle.js"></script>
+    </head>
+    <body>
+
+        <nav class="nav justify-content-end">
+            <a class="nav-link active" href="/home">Home</a>
+            <a class="nav-link" href="./check">Check</a>
+            <a class="nav-link" href="./logout">Logout</a>
+            <!-- <a class="nav-link disabled" href="#"></a> -->
+        </nav>
+        <div class='warning'>
+
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 ">
+                        <div class="list-group ">
+                        <a href="./profile" class="list-group-item list-group-item-action ">Profile</a>
+                        <a href="./brand" class="list-group-item list-group-item-action">Brand</a>
+                        <a href="./product" class="list-group-item list-group-item-action active">Products</a>
+                        <a href="./createBarcode" class="list-group-item list-group-item-action">Create barcode</a>
+                        <a href="#" class="list-group-item list-group-item-action">Verified</a>
+                        <a href="./history" class="list-group-item list-group-item-action">History</a>
+                        <a href="./explorer" class="list-group-item list-group-item-action">Explorer</a>
+                      <!-- <a href="#" class="list-group-item list-group-item-action">Media</a> -->
+                      <!-- <a href="#" class="list-group-item list-group-item-action">Post</a>
+                      <a href="#" class="list-group-item list-group-item-action">Category</a>
+                      <a href="#" class="list-group-item list-group-item-action">New</a>
+                      <a href="#" class="list-group-item list-group-item-action">Comments</a>
+                      <a href="#" class="list-group-item list-group-item-action">Appearance</a>
+                      <a href="#" class="list-group-item list-group-item-action">Reports</a>
+                      <a href="#" class="list-group-item list-group-item-action">Settings</a> -->
+                      
+                      
+                    </div> 
+                </div>
+                
+                <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Your product</h4>
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-md-12">
+                                        <p id="product_warning"></p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>You will create product for: </p>
+                                            <table class="table">
+                                                <tr>
+                                                    <th>Company:</th>
+                                                    <td id="productCompany"></td>
+                                                    <td id="productCompanyAddress"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Brand:</th>
+                                                    <td id="productBrand"></td>
+                                                    <td id="productBrandAddress"></td>
+                                                </tr>
+                                            </table>
+                                    </div>
+                                </div>
+
+                                <div class="row register_product" style="display:none">
+                                    <div class="col-md-12">
+                                        <br>
+                                            <!-- <p>! Your ethereum address  <span id="userAddress"></span>    will be connect with this company. Only this address can change company information</p> -->
+                                        <form action='/createProduct' method="post">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="registerProductDesc">Product description *</label>
+                                                <input type="text"  name='description'class="form-control" id="registerProductDesc" placeholder="LG gram Thin and Light Laptop " required>
+                                                </div>
+                                                <!-- <div class="form-group col-md-6">
+                                                <label for="inputPassword4">Password</label>
+                                                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                                </div> -->
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="registerProductDetails">Details *</label>
+                                                <input type="text" name='details' class="form-control" id="registerProductDetails" placeholder="15.6 Full HD IPS Display, Intel Core i5 (8th Gen), 8GB RAM, 256GB SSD, Back-lit Keyboard - Dark Silver – 15Z980-U.AAS5U1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="registerProductYear">Year (optional)</label>
+                                                <input type="number" name='year' min='1900' class="form-control" id="registerProductYear" placeholder="2018">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="registerProductOrigin">Origin (optional)</label>
+                                                <input type="text" name='origin' class="form-control" id="registerProductOrigin" placeholder="China">
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <label for="inputAddress2">Address 2</label>
+                                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                                            </div> -->
+                                            <!-- <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                <label for="inputCity">City</label>
+                                                <input type="text" class="form-control" id="inputCity">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                <label for="inputState">State</label>
+                                                <select id="inputState" class="form-control">
+                                                    <option selected>Choose...</option>
+                                                    <option>...</option>
+                                                </select>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                <label for="inputZip">Zip</label>
+                                                <input type="text" class="form-control" id="inputZip">
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="form-group">
+                                                <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                                <label class="form-check-label" for="gridCheck">
+                                                    Check me out
+                                                </label>
+                                                </div>
+                                            </div> -->
+                                            <a href="#" type='submit'  class="btn btn-info" role="button">Register</a>
+                                            <!-- <a href="#" type='submit' onclick='createProduct();return false' class="btn btn-info" role="button">Register</a> -->
+
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                                <div class="productList">
+                                    <br>
+                                    <hr>
+                                    <input class="form-control" id="productSearch" type="text" placeholder="Search..">
+                                    
+                                        <p>Your product : <span id="userProductCount"></span></p>
+                                    <!-- <ul id="productList"> </ul> -->
+                                    <!-- <p id='toogle_form'>
+                                        <a class="btn btn-primary" data-toggle="collapse" href="" role="button" aria-expanded="false" aria-controls="">
+                                          Collapse
+                                        </a>
+                                    </p> -->
+
+                                    <!-- <form class='123444'>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                            <label for="registerProductDesc">Product description *</label>
+                                            <input type="text" class="form-control" id="registerProductDesc" placeholder="LG gram Thin and Light Laptop " required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="registerProductDetails">Details *</label>
+                                            <input type="text" class="form-control" id="registerProductDetails" placeholder="15.6 Full HD IPS Display, Intel Core i5 (8th Gen), 8GB RAM, 256GB SSD, Back-lit Keyboard - Dark Silver – 15Z980-U.AAS5U1">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="registerProductYear">Year (optional)</label>
+                                            <input type="number" min='1900' class="form-control" id="registerProductYear" placeholder="2018">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="registerProductOrigin">Origin (optional)</label>
+                                            <input type="text" class="form-control" id="registerProductOrigin" placeholder="China">
+                                        </div>
+                                        <a href="#" onclick='updateProduct();return false' class="btn btn-info" role="button">Register</a>
+                                    </form> -->
+
+                                </div>
+
+
+                                
+
+                            </div>
+                        </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    <script>
+
+    // var Events = require('../models/events');
+    
+     function createProduct(event){
+
+        const desc = $('#registerProductDesc').val();
+        const det = $('#registerProductDetails').val();
+        const year = $('#registerProductYear').val();
+        const orig = $('#registerProductOrigin').val();
+        
+        var addr = utils.getRandomAddress();
+        
+        deveryRegistryClient.addProduct(addr,desc,det,year,orig).then(transaction => {
+            var eventData ={
+                app: req.body.nickname,
+                password: bcrypt.hashSync(req.body.passwd,10),
+                passwordConf: req.body.passwdRepeat,
+                active:true,
+                secret: createHash(req.body.email+req.body.nickname)
+                };
+            Events.create()
+            // console.log('transaction address',transaction.hash);
+            //... other stuff
+        }).catch(err => {
+            if(err.message.indexOf('User denied')){
+                console.log('The user denied the transaction')
+                //...
+            }
+
+            ///handle other exceptions here
+
+        })
+     }
+    </script>
+
+    <script>
+        $(document).ready(function(){
+          $("#productSearch").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".productList form").filter(function() {
+                var tog = true;
+                var f = $(this);
+                f.find('input').each(function(index){
+                    try{
+                        var item = $(this).attr('value');
+                        if (item){
+                            console.log(item.toLowerCase().indexOf(value));
+                            if (item.toLowerCase().indexOf(value)> -1){
+                                tog = false;
+                                return false;
+                            }
+                        }
+                    }
+                    catch (er){
+                        console.log(er);
+                    }
+                    
+                    // alert($(this).attr('value'));
+                });
+                if(tog == true){
+                    let cl = f.attr('class').split(' ')[0];
+                    console.log(cl);
+                    // alert(cl);
+                    $("a[href='."+cl+"']").hide();
+                    f.hide();
+                }
+                else{
+                    let cl = f.attr('class').split(' ')[0];
+                    // console.log(cl);
+                    $("a[href='."+cl+"']").show();
+                    f.show();
+                    // f.toggle(true);
+                }
+            });
+          });
+        });
+        </script>
+    </body>
+</html>
