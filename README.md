@@ -1,10 +1,14 @@
 # Ethereum barcode
 
+(live demo - http://46.101.60.189:3000 )
 Platform for creating and managing barcodes via Etherereum blockchain
 
 
 ## Getting started
 
+Install mongoDB 
+
+after that type -
 ```
 node app
 ```
