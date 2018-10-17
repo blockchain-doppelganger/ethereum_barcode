@@ -28,10 +28,6 @@ var UserSchema = new mongoose.Schema({
   },
   secret:{
     type:String
-  },
-  companyId:{
-    type: Number,
-    unique:true
   }
 });
 
