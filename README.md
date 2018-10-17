@@ -6,7 +6,7 @@ Platform for creating and managing barcodes via Etherereum blockchain
 ## Getting started
 
 ```
-npm run dev
+node app
 ```
 
 ## Start server
