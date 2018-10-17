@@ -25,7 +25,7 @@ function initWeb3(){
     const utils = devery.Utils;
     window.utils = utils;
     var deveryRegistryClient = new DeveryRegistry({address:'0xf3838287aeae92300bd98a4d82ad5b841ff35f58'});
-    // // let deveryRegistryClient = new DeveryRegistry();
+    // var deveryRegistryClient = new DeveryRegistry();
     window.deveryRegistryClient = deveryRegistryClient;
 
    
@@ -159,15 +159,15 @@ function initWeb3(){
                                     "style":"color:white",
                                     "click":function(e){
                                         
-                                        const prodAddress = $(this).parent().attr('class').split(' ')[0];
+                                        var prodAddress = $(this).parent().attr('class').split(' ')[0];
+                                    //    console.log(prodAddress);
+                                       var desc = $(this).parent().find('#updateProductDesc').val();
+                                       var det = $(this).parent().find('#updateProductDet').val();
+                                       var year = $(this).parent().find('#updateProductYear').val();
+                                       var orig = $(this).parent().find('#updateProductOrigin').val();
+                                       var acti = $(this).parent().find('#updateProductActive').is(':checked');
                                        
-                                        const desc = $(this).parent().find('#updateProductDesc').val();
-                                        const det = $(this).parent().find('#updateProductDet').val();
-                                        const year = $(this).parent().find('#updateProductYear').val();
-                                        const orig = $(this).parent().find('#updateProductOrigin').val();
-                                        const acti = $(this).parent().find('#updateProductActive').is(':checked');
-
-                                        deveryRegistryClient.updateProduct(prodAddress,desc,det,year,orig,acti,true).then(transaction => {
+                                        deveryRegistryClient.updateProduct(prodAddress,desc,det,year,orig,acti).then(transaction => {
                                             // console.log('transaction address',transaction.hash);
                                             //... other stuff
                                         }).catch(err => {

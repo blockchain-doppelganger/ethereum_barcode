@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/profile.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+
+        <script src="js/profile/jquery-3.3.1.js"></script>
+        <script src="js/profile/web3.min.js"> </script>
+        <script src="js/profile/bootstrap.min.js"></script>
+        <script src="dist/historyBundle.js"></script>
+        <script src="js/axios.min.js"></script>
+
+    </head>
+    <body>
+
+        <nav class="nav justify-content-end">
+            <a class="nav-link active" href="/home">Home</a>
+            <a class="nav-link" href="./check">Check</a>
+            <a class="nav-link" href="./logout">Logout</a>
+            <!-- <a class="nav-link disabled" href="#"></a> -->
+        </nav>
+        <div class='warning'>
+
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 ">
+                        <div class="list-group ">
+                        <a href="./profile" class="list-group-item list-group-item-action ">Profile</a>
+                        <a href="./brand" class="list-group-item list-group-item-action">Brand</a>
+                        <a href="./product" class="list-group-item list-group-item-action ">Products</a>
+                        <a href="./createBarcode" class="list-group-item list-group-item-action">Create barcode</a>
+                        <a href="#" class="list-group-item list-group-item-action">Verified</a>
+                        <a href="./history" class="list-group-item list-group-item-action ">History</a>
+                        <a href="./explorer" class="list-group-item list-group-item-action active">Explorer</a>
+                      <!-- <a href="#" class="list-group-item list-group-item-action">Media</a> -->
+                      <!-- <a href="#" class="list-group-item list-group-item-action">Post</a>
+                      <a href="#" class="list-group-item list-group-item-action">Category</a>
+                      <a href="#" class="list-group-item list-group-item-action">New</a>
+                      <a href="#" class="list-group-item list-group-item-action">Comments</a>
+                      <a href="#" class="list-group-item list-group-item-action">Appearance</a>
+                      <a href="#" class="list-group-item list-group-item-action">Reports</a>
+                      <a href="#" class="list-group-item list-group-item-action">Settings</a> -->
+                      
+                      
+                    </div> 
+                </div>
+                
+                <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- <div class="col-md-12">
+                                        <h4>Your product</h4>
+                                        <hr>
+                                    </div> -->
+                                </div>
+                                <div class="row ">
+                                    <div class="col-md-12">
+                                        <p id="product_warning"></p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                        <div class="col-md-12">
+                                            <h4>Explorer</h4>
+                                            <hr>
+                                        </div>
+                                </div>
+
+                                <div class="row table-responsive" id="companySearch" >
+                                    
+                                    
+                                    <table class="table">
+                                        <br>
+                                        <thead> 
+                                            <tr>
+                                                <th>Company Name</th>
+                                                <th>Company ethereum address</th>
+                                                <th>Active</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td id="compName"></td>
+                                                <td id="compAddr"></td>
+                                                <td id="compActive"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="col-md-12">
+                                            <input class="form-control" id="companyAddress" type="text" placeholder="company ethereum address">
+                                            <br>
+                                            <button class="btn" onclick='searchCompany();return false;' type="submit">Search</button>
+                                            <br>
+                                            <br>
+                                    </div>
+                                </div>
+                                 <!-- <input class="form-control" id="historySearch" type="text" placeholder="Search.."> -->
+                                 <br>
+                                 <br>
+
+                                 <hr>
+                                 <div class="row table-responsive" id="brandSearch">
+                                        
+                                        
+                                        <table class="table">
+                                            <br>
+                                            <thead> 
+                                                <tr>
+                                                    <th>Brand Name</th>
+                                                    <th>BrandCompany ethereum address</th>
+                                                    <th>Company address</th>
+                                                    <th>Active</th>
+                                                </tr>
+                                            </thead>
+    
+                                            <tbody>
+                                                <tr>
+                                                    <td id="brandName"></td>
+                                                    <td id="brandAddr"></td>
+                                                    <td id="brandCompanyAddress"></td>
+                                                    <td id="brandActive"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="col-md-12">
+                                                <input class="form-control" id="brandAddress" type="text" placeholder="brand ethereum address">
+                                                <br>
+                                                <button class="btn" onclick='searchBrand();return false;' type="submit">Search</button>
+                                                <br>
+                                                <br>
+                                            </div>
+                                </div>
+                                <br>
+                                <br>
+
+                                <hr>
+                                <div class="row table-responsive" id="productSearch">
+                                        
+                                        
+                                        <table class="table">
+                                            <br>
+                                            <thead> 
+                                                <tr>
+                                                    <th>Description</th>
+                                                    <th>Brand address</th>
+                                                    <th>Details</th>
+                                                    <th>Product Address</th>
+                                                    
+                                                    <th>Year</th>
+                                                    <th>Origin</th>
+                                                    <th>Active</th>
+                                                </tr>
+                                            </thead>
+    
+                                            <tbody>
+                                                <tr>
+                                                    <td id="productDescription"></td>
+                                                    <td id="productBrand"></td>
+                                                    <td id="productDetails"></td>
+                                                    <td id="productAddress"></td>
+
+                                                    <td id="productYear"></td>
+                                                    <td id="productOrigin"></td>
+                                                    <td id="productActive"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="col-md-12">
+                                                <input class="form-control" id="productAddress" type="text" placeholder="product ethereum address">
+                                                <br>
+                                                <button class="btn" onclick='searchProduct();return false;' type="submit">Search</button>
+                                                <br>
+                                                <br>
+                                            </div>
+                                </div>
+
+                            </div>
+                        </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+
+    <script>
+        function searchCompany(e){
+            deveryRegistryClient.getApp($('#companyAddress').val()).then(app => {
+                $('#compName').html(app.appName);
+                $('#compAddr').html(app.appAccount);
+                $('#compActive').html(app.active);
+            })
+        }
+
+        function searchBrand(e){
+            deveryRegistryClient.getBrand($('#brandAddress').val()).then(brand => {
+                $('#brandName').html(brand.brandName);
+                $('#brandAddr').html(brand.brandAccount);
+                $('#brandActive').html(brand.active);
+                $('#brandCompanyAddress').html(brand.appAccount);
+            })
+        }
+
+        function searchProduct(e){
+            deveryRegistryClient.getProduct($('#companyAddress').val()).then(product => {
+                $('#productDescription').html(product.description);
+                $('#productBrand').html(product.brandAccount);
+                $('#productDetails').html(product.details);
+                $('#productAddress').html(product.productAccount);
+
+                $('#productYear').html(product.year);
+                $('#productOrigin').html(product.origin);
+                $('#productActibe').html(product.active);
+            })
+        }
+    </script>
+
+    </body>
+</html>

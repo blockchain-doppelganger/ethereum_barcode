@@ -2,16 +2,78 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var Company = require('../models/company');
+var Event = require('../models/events');
 var path = require('path');
 var createHash = require("string-hash");
 // var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt');
+var infura = require('../config/infura');
+
+if (typeof fetch !== 'function') {
+  global.fetch = require('node-fetch-polyfill');
+}
+
+var Web3 = require('web3');
+const testnet = true;
+const ropstenUrl = `https://ropsten.infura.io/${infura.API}`;
+const web3 = new Web3(new Web3.providers.HttpProvider(ropstenUrl));
+global.web3 = web3;
+// console.log(web3.eth.accounts);
+// global.web3 = web3;
+// if (typeof web3 !== 'undefined') {
+//   web3 = new Web3(web3.currentProvider);
+//   console.log('using metamask');
+//   console.log(web3.eth.coinbase);
+// } else {
+//   // Set the provider you want from Web3.providers
+//   console.log('cant find metamask')
+//   web3 = new Web3(new Web3.providers.HttpProvider(ropstenUrl));
+
+// }
 
 var devery = require('@devery/devery');
 var DeveryRegistry = devery.DeveryRegistry;
 var utils = devery.Utils;
-// var deveryRegistryClient = new DeveryRegistry({address:'0xf3838287aeae92300bd98a4d82ad5b841ff35f58'});
-var deveryRegistryClient = new DeveryRegistry();
+var deveryRegistryClient = new DeveryRegistry({address:'0xf3838287aeae92300bd98a4d82ad5b841ff35f58'});
+// var deveryRegistryClient = new DeveryRegistry();
+deveryRegistryClient.setProductAddedEventListener((productAccount,brandAccount,appAccount,description,active) => {
+  // console.log(`a product has been added `);
+  var eventData = {
+    appAddress:appAccount,
+    brandAddress:brandAccount,
+    productAddress:productAccount,
+    event:'create product: ' + description
+
+  };
+  Event.create(eventData,function(error,res,next){
+    if (error) {
+      return next(error);
+    } else {
+      console.log('create event');
+    }
+    });
+  });
+
+deveryRegistryClient.setProductUpdatedEventListener((productAccount,brandAccount,appAccount,description,active) => {
+  console.log(`product has been updated `);
+  var eventData = {
+    appAddress:appAccount,
+    brandAddress:brandAccount,
+    productAddress:productAccount,
+    event:'update product: ' + description
+
+  };
+  Event.create(eventData,function(error,Event,next){
+      if (error) {
+        return next(error);
+      } else {
+        console.log('create event');
+      }
+  });
+})
+
+
+
 
 // var mailgun = require("mailgun-js");
 // var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
@@ -168,7 +230,7 @@ router.get('/brand', function (req, res, next) {
 });
 
 
-router.get('/brand', function (req, res, next) {
+router.post('/getHistory', function (req, res) {
   User.findById(req.session.userId)
     .exec(function (error, user) {
       if (error) {
@@ -179,39 +241,42 @@ router.get('/brand', function (req, res, next) {
           err.status = 400;
           return next(err);
         } else {
-          // return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
-          var companyId = user.companyId;
-          console.log(companyId);
-          // Company.findById(companyId).exec(function(error,comp){
-          //     if (error) {
-          //       return next(error);
-          //     }
-          //     else { 
-          //       if (comp === null) {
-          //         console.log('company is not register');
-          //         // var err = new Error('Not authorized! Go back!');
-          //         // err.status = 400;
-          //         // return next(err);
-          //     }
-          //     else{
-          //       var obj = {
-          //         companyName: comp.companyName,
-          //         address: comp.address,
-          //         address2: comp.address2,
-          //         city:comp.city,
-          //         zip:comp.zip
-                  
-          //       }
-          //       console.log(obj);
-      
-          //       return res.render('brand',obj);
-          //     }
-           
-          //   }
-          // });
-          
-          // return res.render(path.join(__dirname + '/../templateLogReg/profile.html'), obj);
 
+          // console.log('we here');
+
+          if (req.body.app != ''){
+            Event.find({appAddress:req.body.app}).exec(function(er,Events){
+              // console.log(Events);
+              res.send(Events);
+            });
+          }
+          else{
+            Event.find({brandAddress:req.body.brand}).exec(function(er,Events){
+              // console.log(Events);
+              res.send(Events);
+            })
+          }
+          
+          
+        }
+      }
+    });
+});
+
+router.get('/history', function (req, res, next) {
+  User.findById(req.session.userId)
+    .exec(function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        if (user === null) {
+          var err = new Error('Not authorized! Go back!');
+          err.status = 400;
+          return next(err);
+        } else {
+          
+          return res.render('history');
+          
         }
       }
     });
@@ -298,6 +363,30 @@ router.get('/home', function (req, res, next) {
     return res.render('home');
 });
 
+router.get('/explorer', function (req, res, next) {
+  User.findById(req.session.userId)
+    .exec(function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        if (user === null) {
+          var err = new Error('Not authorized! Go back!');
+          err.status = 400;
+          return next(err);
+        } else {
+          
+          return res.render('explorer');
+          
+        }
+      }
+    });
+});
+
+
+
+
+
+
 
 // for create and upgrade company info 
 
@@ -361,40 +450,41 @@ router.post('/createProduct', function (req, res, next) {
           return next(err);
         } else {
           
-          if (req.body.description && req.body.details){
-            const addr = utils.getRandomAddress();
-            deveryRegistryClient.addProduct(addr,req.body.description,req.body.details,req.body.year,req.body.origin).then(transaction => {
+          console.log(req.body.prodAddr);
+        //   if (req.body.description && req.body.details){
+        //     // const addr = utils.getRandomAddress();
+        //     deveryRegistryClient.addProduct(addr,req.body.description,req.body.details,req.body.year,req.body.origin).then(transaction => {
               
-              var eventData ={
-                  app: req.body.nickname,
-                  brand: 
-                };
+        //       var eventData ={
+        //           app: req.body.nickname,
+        //           brand: 
+        //         };
 
-            Events.create(eventData, function(er,Event){
+        //     Events.create(eventData, function(er,Event){
 
-            })
-            // console.log('transaction address',transaction.hash);
-            //... other stuff
-        }).catch(err => {
-            if(err.message.indexOf('User denied')){
-                console.log('The user denied the transaction')
-                //...
-            }
+        //     })
+        //     // console.log('transaction address',transaction.hash);
+        //     //... other stuff
+        // }).catch(err => {
+        //     if(err.message.indexOf('User denied')){
+        //         console.log('The user denied the transaction')
+        //         //...
+        //     }
 
-            ///handle other exceptions here
+        //     ///handle other exceptions here
 
-        })
-          }
+        // })
+        //   }
 
 
 
 
           // return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
-          obj = {
-            // email: user.email,
-            username: user.username
-          }
-          return res.render('profile', obj);
+          // obj = {
+          //   // email: user.email,
+          //   username: user.username
+          // }
+          // return res.render('profile', obj);
 
         }
       }
@@ -406,7 +496,9 @@ router.post('/createProduct', function (req, res, next) {
 
 
 
-
+router.post('/test', function (req, res, next) {
+  console.log('test');
+});
 
 
 // GET for logout logout

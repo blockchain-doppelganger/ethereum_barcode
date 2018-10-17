@@ -1,14 +1,20 @@
 var mongoose = require('mongoose');
 
 
-var CompanySchema = new mongoose.Schema({
+var EventSchema = new mongoose.Schema({
     timestamp:{
        type: Date, default: Date.now
     },
-    app:{
+    appName:{
       type:String
     },
-    brand:{
+    appAddress:{
+      type:String
+    },
+    brandName:{
+      type:String
+    },
+    brandAddress:{
       type:String
     },
     event: {
@@ -16,12 +22,9 @@ var CompanySchema = new mongoose.Schema({
       unique: false,
       required: true,
       trim: true
-    },
-    transaction:{
-      type: String
     }
   });
 
-var Company = mongoose.model('Company', CompanySchema);
+var Event = mongoose.model('Event', EventSchema);
 
-module.exports = Company;
+module.exports = Event;

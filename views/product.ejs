@@ -8,6 +8,8 @@
         <script src="js/profile/web3.min.js"> </script>
         <script src="js/profile/bootstrap.min.js"></script>
         <script src="dist/productBundle.js"></script>
+        
+        <script src="js/axios.min.js"></script>
     </head>
     <body>
 
@@ -82,7 +84,7 @@
                                     <div class="col-md-12">
                                         <br>
                                             <!-- <p>! Your ethereum address  <span id="userAddress"></span>    will be connect with this company. Only this address can change company information</p> -->
-                                        <form action='/createProduct' method="post">
+                                        <form>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                 <label for="registerProductDesc">Product description *</label>
@@ -106,37 +108,8 @@
                                                 <label for="registerProductOrigin">Origin (optional)</label>
                                                 <input type="text" name='origin' class="form-control" id="registerProductOrigin" placeholder="China">
                                             </div>
-                                            <!-- <div class="form-group">
-                                                <label for="inputAddress2">Address 2</label>
-                                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                                            </div> -->
-                                            <!-- <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                <label for="inputCity">City</label>
-                                                <input type="text" class="form-control" id="inputCity">
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                <label for="inputState">State</label>
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>Choose...</option>
-                                                    <option>...</option>
-                                                </select>
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                <label for="inputZip">Zip</label>
-                                                <input type="text" class="form-control" id="inputZip">
-                                                </div>
-                                            </div> -->
-                                            <!-- <div class="form-group">
-                                                <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                                <label class="form-check-label" for="gridCheck">
-                                                    Check me out
-                                                </label>
-                                                </div>
-                                            </div> -->
-                                            <a href="#" type='submit'  class="btn btn-info" role="button">Register</a>
-                                            <!-- <a href="#" type='submit' onclick='createProduct();return false' class="btn btn-info" role="button">Register</a> -->
+                                            <!-- <a href="#"   class="btn btn-info" role="button">Register</a> -->
+                                            <a href="#" onclick='createProduct(); return false;' class="btn btn-info" role="button">Register</a>
 
                                         </form>
                                     </div>
@@ -192,44 +165,106 @@
 
             </div>
         </div>
+
     <script>
+            function createProduct(event){
+                console.log('we here');
+                // var Events = require('../models/events');
 
-    // var Events = require('../models/events');
-    
-     function createProduct(event){
-
-        const desc = $('#registerProductDesc').val();
-        const det = $('#registerProductDetails').val();
-        const year = $('#registerProductYear').val();
-        const orig = $('#registerProductOrigin').val();
-        
-        var addr = utils.getRandomAddress();
-        
-        deveryRegistryClient.addProduct(addr,desc,det,year,orig).then(transaction => {
-            var eventData ={
-                app: req.body.nickname,
-                password: bcrypt.hashSync(req.body.passwd,10),
-                passwordConf: req.body.passwdRepeat,
-                active:true,
-                secret: createHash(req.body.email+req.body.nickname)
+                const desc = $('#registerProductDesc').val();
+                const det = $('#registerProductDetails').val();
+                const year = $('#registerProductYear').val();
+                const orig = $('#registerProductOrigin').val();
+                
+                var addr = utils.getRandomAddress();
+                
+                deveryRegistryClient.addProduct(addr,desc,det,year,orig).then(transaction => {
+                
+                });
+                
+                const eventData= {
+                    prodAddr:addr,
+                    desc:desc,
+                    det:det,
+                    year:year,
+                    orig:orig
                 };
-            Events.create()
-            // console.log('transaction address',transaction.hash);
-            //... other stuff
-        }).catch(err => {
-            if(err.message.indexOf('User denied')){
-                console.log('The user denied the transaction')
-                //...
-            }
+                axios.post('/createProduct', eventData)
+                .then(function (response) {
+                    // handle success
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+                .then(function () {
+                    // always executed
+                });
 
-            ///handle other exceptions here
+                // deveryRegistryClient.addProduct(addr,desc,det,year,orig).then(transaction => {
+                    // deveryRegistryClient.getBrand(web3.eth.coinbase).then(brand => {
+                    //     if(brand.active){
+                    //         deveryRegistryClient.getApp(brand.appAccount).then(app =>{
 
-        })
-     }
-    </script>
+                    //             var eventData ={
+                    //                 app: app.appName,
+                    //                 appAddress:brand.account,
+                    //                 brand: brand.brandName,
+                    //                 brandAddress:brand.brandAccount,
+                    //                 transaction:transaction,
+                    //                 event: 'create product'
+                    //             };
+
+                                // const axios = require('axios');
+
+                                // 
+                                // axios.post('/createProduct', eventData)
+                                // .then(function (response) {
+                                //     // handle success
+                                //     console.log(response);
+                                // })
+                                // .catch(function (error) {
+                                //     // handle error
+                                //     console.log(error);
+                                // })
+                                // .then(function () {
+                                //     // always executed
+                                // });
+
+                                // // console.log('eventData',eventData);
+                                // Events.create(eventData, function(er,Event){
+
+                                // }).catch((er)=>{
+                                //     console.log(er);
+                                // })
+                            // })
+                        
+                        // }
+                //     })
+
+                // });
+                
+                // deveryRegistryClient.addProduct(addr,desc,det,year,orig).then(transaction => {
+                //     // console.log('transaction address',transaction.hash);
+                //     //... other stuff
+                // }).catch(err => {
+                //     if(err.message.indexOf('User denied')){
+                //         console.log('The user denied the transaction')
+                //         //...
+                //     }
+
+                //     ///handle other exceptions here
+
+                // });
+
+           
+        
+    };
+      </script>
 
     <script>
-        $(document).ready(function(){
+
           $("#productSearch").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             $(".productList form").filter(function() {
@@ -239,7 +274,7 @@
                     try{
                         var item = $(this).attr('value');
                         if (item){
-                            console.log(item.toLowerCase().indexOf(value));
+                            // console.log(item.toLowerCase().indexOf(value));
                             if (item.toLowerCase().indexOf(value)> -1){
                                 tog = false;
                                 return false;
@@ -268,7 +303,9 @@
                 }
             });
           });
-        });
+        
         </script>
+
+        
     </body>
 </html>

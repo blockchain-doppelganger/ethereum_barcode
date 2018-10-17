@@ -1,6 +1,7 @@
 
 function initWeb3(){
-    var FileSaver = require('file-saver');
+
+    // var FileSaver = require('file-saver');
     const createKeccakHash = require('keccak')
 
     function toChecksumAddress(address) {
@@ -34,31 +35,24 @@ function initWeb3(){
 		console.log('done ...')
 		// $('.container').show();
         $('#warning').html();
-        const addressUser = web3.eth.coinbase;
-        deveryRegistryClient.getApp(addressUser).then(app => {
-            // console.log(app)
-            // console.log(app.appAccount);
-            // console.log(utils.isAddress(app.appAccount));
-            const emptyAddress = /^0x0+$/.test(app.appAccount);
+        const userAddress = toChecksumAddress(web3.eth.coinbase);
+        deveryRegistryClient.getBrand(userAddress).then(brand => {
+            const emptyAddress = /^0x0+$/.test(brand.appAccount);
             if (emptyAddress){
-                $('#warning').html("You didn't register your company and brand. Please go to Brand link and follow the instructions");
+                $('#product_warning').html("You didn't register your company and brand. Please go to Brand link and follow the instructions");
+                $('.register_product').hide();
             }
             else {
-                $('#warning').html('');
-                const userAddress = toChecksumAddress(web3.eth.coinbase);
-                // console.log(userAddress)
+                $('#product_warning').html('');
                 var lengthProduct =0;
                 deveryRegistryClient.productAccountsLength().then(function(res){
-                    console.log(res);
                     for(let i = 0;i< res;i++){
                          deveryRegistryClient.productAccountsArray(i).then(address => {
                             deveryRegistryClient.getProduct(address).then(product => {
                                 // console.log(product.brandAccount);
                                  if (product.brandAccount == userAddress) {
                                     lengthProduct++;
-                                    console.log(address);
-                                    // lass=c"btn btn-primary" 
-                                    //aria-expanded="false
+
                                     var row = $('<tr></tr>');
                                     $('<td></td>',{
                                         html:product.description
@@ -105,7 +99,7 @@ function initWeb3(){
                                                     deveryRegistryClient.addressHash(address).then(hashRes => {
                                                             deveryRegistryClient.mark(address,hashRes).then(transaction => {
                                                             const codeWriter = new ZXing.BrowserQRCodeSvgWriter(address)
-                                                            console.log('ZXing code writer initialized')
+                                                            // console.log('ZXing code writer initialized')
                                                             let svgElement;
                                                             createbtn.hide();
                                                             // const input = document.getElementById('textInput').value
@@ -151,25 +145,22 @@ function initWeb3(){
                                   //... do more stuff
                              })
                           })
-                     }
+                    }
 
-                    //  console.log(lengthBrand);
                 });  
             }
             // if(app.active){
             //     console.log(app.appName);
             //     //... other stuff
             // }
-        })
-	} else {
+        });
+    } 
+    
+    else {
 	  // Set the provider you want from Web3.providers
         $('.product_warning').html('Please connect to Metamask and refresh page ...');
 		// $('.container').hide();
 	}
-
-	// var networkId = web3.version.network;
-	// var user_address = web3.eth.accounts[0];
-	// console.log(user_address);
 
 }
 

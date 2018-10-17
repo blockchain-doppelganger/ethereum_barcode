@@ -7,7 +7,9 @@
         <script src="js/profile/jquery-3.3.1.js"></script>
         <script src="js/profile/web3.min.js"> </script>
         <script src="js/profile/bootstrap.min.js"></script>
-        <script src="dist/productBundle.js"></script>
+        <script src="dist/historyBundle.js"></script>
+        <script src="js/axios.min.js"></script>
+
     </head>
     <body>
 
@@ -27,10 +29,10 @@
                         <div class="list-group ">
                         <a href="./profile" class="list-group-item list-group-item-action ">Profile</a>
                         <a href="./brand" class="list-group-item list-group-item-action">Brand</a>
-                        <a href="./product" class="list-group-item list-group-item-action active">Products</a>
+                        <a href="./product" class="list-group-item list-group-item-action ">Products</a>
                         <a href="./createBarcode" class="list-group-item list-group-item-action">Create barcode</a>
                         <a href="#" class="list-group-item list-group-item-action">Verified</a>
-                        <a href="./history" class="list-group-item list-group-item-action">History</a>
+                        <a href="./history" class="list-group-item list-group-item-action active">History</a>
                         <a href="./explorer" class="list-group-item list-group-item-action">Explorer</a>
                       <!-- <a href="#" class="list-group-item list-group-item-action">Media</a> -->
                       <!-- <a href="#" class="list-group-item list-group-item-action">Post</a>
@@ -61,125 +63,42 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <p>You will create product for: </p>
-                                            <table class="table">
-                                                <tr>
-                                                    <th>Company:</th>
-                                                    <td id="productCompany"></td>
-                                                    <td id="productCompanyAddress"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Brand:</th>
-                                                    <td id="productBrand"></td>
-                                                    <td id="productBrandAddress"></td>
-                                                </tr>
-                                            </table>
+                                        <div class="col-md-12">
+                                            <h4>History</h4>
+                                            <hr>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="row register_product" style="display:none">
-                                    <div class="col-md-12">
-                                        <br>
-                                            <!-- <p>! Your ethereum address  <span id="userAddress"></span>    will be connect with this company. Only this address can change company information</p> -->
-                                        <form>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                <label for="registerProductDesc">Product description *</label>
-                                                <input type="text" class="form-control" id="registerProductDesc" placeholder="LG gram Thin and Light Laptop " required>
-                                                </div>
-                                                <!-- <div class="form-group col-md-6">
-                                                <label for="inputPassword4">Password</label>
-                                                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                                                </div> -->
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="registerProductDetails">Details *</label>
-                                                <input type="text" class="form-control" id="registerProductDetails" placeholder="15.6 Full HD IPS Display, Intel Core i5 (8th Gen), 8GB RAM, 256GB SSD, Back-lit Keyboard - Dark Silver – 15Z980-U.AAS5U1">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="registerProductYear">Year (optional)</label>
-                                                <input type="number" min='1900' class="form-control" id="registerProductYear" placeholder="2018">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="registerProductOrigin">Origin (optional)</label>
-                                                <input type="text" class="form-control" id="registerProductOrigin" placeholder="China">
-                                            </div>
-                                            <!-- <div class="form-group">
-                                                <label for="inputAddress2">Address 2</label>
-                                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                                            </div> -->
-                                            <!-- <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                <label for="inputCity">City</label>
-                                                <input type="text" class="form-control" id="inputCity">
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                <label for="inputState">State</label>
-                                                <select id="inputState" class="form-control">
-                                                    <option selected>Choose...</option>
-                                                    <option>...</option>
-                                                </select>
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                <label for="inputZip">Zip</label>
-                                                <input type="text" class="form-control" id="inputZip">
-                                                </div>
-                                            </div> -->
-                                            <!-- <div class="form-group">
-                                                <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                                <label class="form-check-label" for="gridCheck">
-                                                    Check me out
-                                                </label>
-                                                </div>
-                                            </div> -->
-                                            <a href="#" onclick='createProduct();return false' class="btn btn-info" role="button">Register</a>
-                                        </form>
-                                    </div>
-                                </div>
-                                
-                                <div class="productList">
-                                    <br>
-                                    <hr>
-                                    <input class="form-control" id="productSearch" type="text" placeholder="Search..">
-                                    
-                                        <p>Your product : <span id="userProductCount"></span></p>
-                                    <!-- <ul id="productList"> </ul> -->
-                                    <!-- <p id='toogle_form'>
-                                        <a class="btn btn-primary" data-toggle="collapse" href="" role="button" aria-expanded="false" aria-controls="">
-                                          Collapse
-                                        </a>
-                                    </p> -->
-
-                                    <!-- <form class='123444'>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                            <label for="registerProductDesc">Product description *</label>
-                                            <input type="text" class="form-control" id="registerProductDesc" placeholder="LG gram Thin and Light Laptop " required>
-                                            </div>
+                               <div class="row">
+                                   <div class="col-md-12">
+                                        <p>History for: </p>
+                                        <table class="table">
+                                            <tr>
+                                                <th id="historyItem"></th>
+                                                <td id="historyAddress"></td>
+                                            </tr>
+                                        </table>
+                                        <div class="table-responsive">
+                                                <table class="table" width='100%'>
+                                                        <thead>
+                                                            <tr>    
+                                                                
+                                                                <th scope="col">Company address</th>
+                                                                <th scope="col">Brand address</th>
+                                                                <th scope="col">Event</th>
+                                                                <th scope="col">Timestamp</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id='historyTable'>
+            
+                                                        </tbody>
+                                                    </table>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="registerProductDetails">Details *</label>
-                                            <input type="text" class="form-control" id="registerProductDetails" placeholder="15.6 Full HD IPS Display, Intel Core i5 (8th Gen), 8GB RAM, 256GB SSD, Back-lit Keyboard - Dark Silver – 15Z980-U.AAS5U1">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="registerProductYear">Year (optional)</label>
-                                            <input type="number" min='1900' class="form-control" id="registerProductYear" placeholder="2018">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="registerProductOrigin">Origin (optional)</label>
-                                            <input type="text" class="form-control" id="registerProductOrigin" placeholder="China">
-                                        </div>
-                                        <a href="#" onclick='updateProduct();return false' class="btn btn-info" role="button">Register</a>
-                                    </form> -->
-
-                                </div>
-
-
-                                
+                                       
+                                   </div>
+                                 <!-- <input class="form-control" id="historySearch" type="text" placeholder="Search.."> -->
+                                 
+                               </div>
 
                             </div>
                         </div>
@@ -190,5 +109,6 @@
 
             </div>
         </div>
+
     </body>
 </html>
