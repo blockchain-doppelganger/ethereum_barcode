@@ -40,7 +40,7 @@ Go to localhost:3000/profile.html. You will see this:
 
 ## Firstly, register your company and brand
 
-Go to brand link (/profile), fill the form, submit
+Go to brand link (/brand), fill the form, submit
 After that register new brand (for your Ethereum address only one brand ) 
 
 <br/>
@@ -50,6 +50,7 @@ After that register new brand (for your Ethereum address only one brand )
 
 ![alt text](https://raw.githubusercontent.com/blockchain-doppelganger/ethereum_barcode/with_registration/v2/brand2.png)
 
+<br/>
 ## Secondly, register your product 
 
 Go to product link (localhost:3000/product) , and fill the form, submit 
@@ -75,7 +76,6 @@ Go to localhost:3000/check, upload barcode, click decode, you will see company n
 
 <br/>
 <br/>
-![alt text](https://raw.githubusercontent.com/blockchain-doppelganger/ethereum_barcode/master/git_img/check2.png)
 
 
 
