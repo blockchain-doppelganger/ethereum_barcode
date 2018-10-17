@@ -100,23 +100,26 @@
     
         </div>  
 
+        <!-- script for barcode library -->
     <script type="text/javascript" src="https://unpkg.com/@zxing/library@dev"></script>
     <script type="text/javascript">
         window.addEventListener('load', function () {
+
+
             const codeReader = new ZXing.BrowserQRCodeReader('video')
             console.log('ZXing code reader initialized')
+            
             document.getElementById('decodeButton').addEventListener('click', () => {
-                // const img = $('#upload_img');
-                // console.log(document.getElementById('img'));
-                // console.log(img);
+                
                 codeReader.decodeFromImage(img).then((result) => {
                     
+                    // get ethereum address from barcode and check in ethereum
                     deveryRegistryClient.check(result.text).then(item => {
                         const brandAccount = item.brandAccount;
                         const appAccount = item.appAccount;
                         const productAccount = item.productAccount;
-                        console.log('productAccount',productAccount);
                         
+                        // get all possible information about product
                         deveryRegistryClient.getApp(appAccount).then(res =>{
                             $('#companyName').html(res.appName);
                         }).catch((err) => {
@@ -150,31 +153,31 @@
                     console.error(err)
                     document.getElementById('result').textContent = err
                 })
-                console.log(`Started decode for image from ${img.src}`)
+                // console.log(`Started decode for image from ${img.src}`)
             })
         })
     </script>
 
     <!-- for uploading images -->
+    <!-- change img element src attribute -->
     <script>
-    $('#upload').change(function(){
-    var input = this;
-    var url = $(this).val();
-    var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-    if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg") ||  ext == "svg" ) 
-     {
-        var reader = new FileReader();
+        $('#upload').change(function(){
+        var input = this;
+        var url = $(this).val();
+        var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+        if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg") ||  ext == "svg" ) 
+        {
+            var reader = new FileReader();
 
-        reader.onload = function (e) {
-           $('#img').attr('src', e.target.result);
+            reader.onload = function (e) {
+            $('#img').attr('src', e.target.result);
+            }
+        reader.readAsDataURL(input.files[0]);
         }
-       reader.readAsDataURL(input.files[0]);
-    }
-    else
-    {
-      $('#img').attr('src', '');
-    }
-  });
+        else{
+            $('#img').attr('src', '');
+        }
+    });
     </script>
 
     <script>

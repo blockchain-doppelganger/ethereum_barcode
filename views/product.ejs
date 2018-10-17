@@ -34,14 +34,7 @@
                         <a href="#" class="list-group-item list-group-item-action">Verified</a>
                         <a href="./history" class="list-group-item list-group-item-action">History</a>
                         <a href="./explorer" class="list-group-item list-group-item-action">Explorer</a>
-                      <!-- <a href="#" class="list-group-item list-group-item-action">Media</a> -->
-                      <!-- <a href="#" class="list-group-item list-group-item-action">Post</a>
-                      <a href="#" class="list-group-item list-group-item-action">Category</a>
-                      <a href="#" class="list-group-item list-group-item-action">New</a>
-                      <a href="#" class="list-group-item list-group-item-action">Comments</a>
-                      <a href="#" class="list-group-item list-group-item-action">Appearance</a>
-                      <a href="#" class="list-group-item list-group-item-action">Reports</a>
-                      <a href="#" class="list-group-item list-group-item-action">Settings</a> -->
+                     
                       
                       
                     </div> 
@@ -167,40 +160,45 @@
         </div>
 
     <script>
+
             function createProduct(event){
-                console.log('we here');
-                // var Events = require('../models/events');
+                
+               
+               // get value from inputs 
 
                 const desc = $('#registerProductDesc').val();
                 const det = $('#registerProductDetails').val();
                 const year = $('#registerProductYear').val();
                 const orig = $('#registerProductOrigin').val();
                 
+                // get random Ethereum address
                 var addr = utils.getRandomAddress();
                 
+                // add product to blockchain
                 deveryRegistryClient.addProduct(addr,desc,det,year,orig).then(transaction => {
                 
                 });
                 
-                const eventData= {
-                    prodAddr:addr,
-                    desc:desc,
-                    det:det,
-                    year:year,
-                    orig:orig
-                };
-                axios.post('/createProduct', eventData)
-                .then(function (response) {
-                    // handle success
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    // handle error
-                    console.log(error);
-                })
-                .then(function () {
-                    // always executed
-                });
+                // const eventData= {
+                //     prodAddr:addr,
+                //     desc:desc,
+                //     det:det,
+                //     year:year,
+                //     orig:orig
+                // };
+
+                // axios.post('/createProduct', eventData)
+                // .then(function (response) {
+                //     // handle success
+                //     console.log(response);
+                // })
+                // .catch(function (error) {
+                //     // handle error
+                //     console.log(error);
+                // })
+                // .then(function () {
+                //     // always executed
+                // });
 
                 // deveryRegistryClient.addProduct(addr,desc,det,year,orig).then(transaction => {
                     // deveryRegistryClient.getBrand(web3.eth.coinbase).then(brand => {
@@ -263,6 +261,8 @@
     };
       </script>
 
+
+      <!-- function for search panel -->
     <script>
 
           $("#productSearch").on("keyup", function() {
