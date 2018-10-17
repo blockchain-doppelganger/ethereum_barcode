@@ -34,7 +34,7 @@ then login
 
 ## Go to you account page
 
-Go to localhost:3000/profile.html. You will see this:
+Go to localhost:3000/profile. You will see this:
 
 ![alt text](https://raw.githubusercontent.com/blockchain-doppelganger/ethereum_barcode/with_registration/v2/profile.png)
 
@@ -77,6 +77,20 @@ Go to localhost:3000/check, upload barcode, click decode, you will see company n
 <br/>
 <br/>
 
+
+# Repository structure 
+
+- config/ (not neccessary )
+- misc/ (not neccessary, will be used in future project version)
+- models/ (define models for mongoDB)
+- node_modes/ (all neccessaries libraries)
+- routes/ (define path for our express app, preprocess get and post request) 
+- templateLogReg/ (static files - js script for our pages, images, and css) 
+    - dist/ (in this repository we will save script preproccess by browserify )
+- v2/ (just images for github README.md file, you read this file now )
+views/ (here we define our page look, use ejs engine and express )
+
+- app.js (start point for our app, we will use command node app.js to run it )
 
 
 
