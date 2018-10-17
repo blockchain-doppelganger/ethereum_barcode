@@ -50,7 +50,7 @@ After that register new brand (for your Ethereum address only one brand )
 
 ![alt text](https://raw.githubusercontent.com/blockchain-doppelganger/ethereum_barcode/with_registration/v2/brand2.png)
 
-<br/>
+
 ## Secondly, register your product 
 
 Go to product link (localhost:3000/product) , and fill the form, submit 
