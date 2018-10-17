@@ -1,7 +1,7 @@
 
 function initWeb3(){
 
-    // var FileSaver = require('file-saver');
+    var FileSaver = require('file-saver');
     const createKeccakHash = require('keccak')
 
     function toChecksumAddress(address) {
